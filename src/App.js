@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Radium from 'radium';
+
 import './App.css';
 import Person from './Person/Person';
 import UserInput from './UserInput/UserInput';
@@ -85,10 +87,15 @@ const App = props => {
 
   const style = {
     backgroundColor: 'green',
+    color: 'white',
     font: 'inherit',
     border: '1px solid blue',
     padding: '8px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    ':hover': {
+      backgroundColor: 'lightgreen',
+      color: 'black'
+    }
   };
 
   let persons = null;
@@ -104,12 +111,23 @@ const App = props => {
           key={person.id} 
           changed={(event) => nameChangedHandler(event, person.id)} />
       })}
-  </div>)
+    </div>)
 
-      style.backgroundColor = 'red';
+    style.backgroundColor = 'red';
+    style[':hover'] = {
+      backgroundColor: 'salmon',
+      color: 'black'
+    };
   }
 
-  
+  let classes = [];
+
+  if (personsState.persons.length <= 2)
+    classes.push('red');
+
+  if (personsState.persons.length <= 1)
+    classes.push('bold');
+
   const userNameChangedHandler = (event) => {
     setUsernameState({username: event.target.value});
   }
@@ -117,9 +135,9 @@ const App = props => {
   return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
-        <p>This is really working!</p>
-        <button style={style} onClick={togglePersonHandler}>Toggle Name</button>          
-        <button style={style} onClick={deletePersonHandler}>Delete Name</button>          
+        <p className={classes.join(' ')}>This is really working!</p>
+        <button key='b_toggle1' style={style} onClick={togglePersonHandler}>Toggle Name</button>          
+        <button key='b_toggle2' style={style} onClick={deletePersonHandler}>Delete Name</button>          
         {persons}
 
         <UserInput userName={usernameState.username} changed={(event) => userNameChangedHandler(event)}/>
@@ -128,4 +146,4 @@ const App = props => {
     );
 
 }
-export default App;
+export default Radium(App);
