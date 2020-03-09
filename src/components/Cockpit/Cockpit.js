@@ -35,7 +35,7 @@ const cockpit = (props) => {
   
   return (
     <div>
-        <h1>Hi, I'm a React App</h1>
+        <h1>{props.title}</h1>
         <p className={classes.join(' ')}>This is really working!</p>
         <button key='b_toggle1' style={style} onClick={props.clicked}>Toggle Name</button>          
         <button key='b_toggle2' style={style} onClick={props.deleted}>Delete Name</button>          
