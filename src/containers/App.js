@@ -5,6 +5,7 @@ import Persons from '../components/Persons/Persons';
 import UserInput from '../components/UserInput/UserInput';
 import UserOutput from '../components/UserOutput/UserOutput';
 import Validation from '../components/Validation/Validation';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 const App = props => {
   const [ personsState, setPersonsState ] = useState({
@@ -84,60 +85,34 @@ const App = props => {
       username: 'Max'    
   });
 
-  const style = {
-    backgroundColor: 'green',
-    color: 'white',
-    font: 'inherit',
-    border: '1px solid blue',
-    padding: '8px',
-    cursor: 'pointer',
-    ':hover': {
-      backgroundColor: 'lightgreen',
-      color: 'black'
-    }
-  };
-
-  let persons = null;
-  
-  if (personsState.showPersons) {
-    persons = (
-    <div>
-      <Persons persons={personsState.persons} 
-      clicked={deletePersonHandler}
-      changed={nameChangedHandler} />
-    </div>)
-
-    style.backgroundColor = 'red';
-    style[':hover'] = {
-      backgroundColor: 'salmon',
-      color: 'black'
-    };
-  }
-
-  let classes = [];
-
-  if (personsState.persons.length <= 2)
-    classes.push('red');
-
-  if (personsState.persons.length <= 1)
-    classes.push('bold');
-
   const userNameChangedHandler = (event) => {
     setUsernameState({username: event.target.value});
   }
 
+  let persons = null;
+  
+  if (personsState.showPersons) {
+    persons = <Persons persons={personsState.persons} 
+      clicked={deletePersonHandler}
+      changed={nameChangedHandler} />    
+  }
+
+  /* now, we only have functions here to manage the states. */
+
   return (
       <div className="App">
-        <h1>Hi, I'm a React App</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
-        <button key='b_toggle1' style={style} onClick={togglePersonHandler}>Toggle Name</button>          
-        <button key='b_toggle2' style={style} onClick={deletePersonHandler}>Delete Name</button>          
+      <Cockpit 
+        showPersons={personsState.showPersons} 
+        persons={personsState.persons}
+        clicked={togglePersonHandler}
+        deleted={deletePersonHandler} />
+
         {persons}
 
         <UserInput userName={usernameState.username} changed={(event) => userNameChangedHandler(event)}/>
         <Validation inputLength={usernameState.username.length} />
       </div>
     );
-
 }
+
 export default App;
