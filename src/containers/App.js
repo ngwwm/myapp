@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 
 import './App.css';
 import Persons from '../components/Persons/Persons';
+/*
 import UserInput from '../components/UserInput/UserInput';
 import UserOutput from '../components/UserOutput/UserOutput';
 import Validation from '../components/Validation/Validation';
+*/
 import Cockpit from '../components/Cockpit/Cockpit';
 
 const App = props => {
@@ -81,6 +83,7 @@ const App = props => {
     })
   }
 
+/*
   const [ usernameState, setUsernameState ] = useState({
       username: 'Max'    
   });
@@ -88,7 +91,7 @@ const App = props => {
   const userNameChangedHandler = (event) => {
     setUsernameState({username: event.target.value});
   }
-
+*/
   let persons = null;
   
   if (personsState.showPersons) {
@@ -108,9 +111,10 @@ const App = props => {
         deleted={deletePersonHandler} />
 
         {persons}
-
+{/*
         <UserInput userName={usernameState.username} changed={(event) => userNameChangedHandler(event)}/>
         <Validation inputLength={usernameState.username.length} />
+*/}
       </div>
     );
 }

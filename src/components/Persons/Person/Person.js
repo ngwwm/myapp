@@ -8,7 +8,8 @@ const person = (props) => {
     <div className="Person">
       <p onClick={props.click}>Hi, I'm {props.name}! I am {props.age} years old.</p>
       <p>{props.children}</p>
-      <input type="text" onChange={props.changed} value={props.name} />      <Validation inputLength={props.name.length} />
+      <input type="text" onChange={props.changed} value={props.name} />
+      <Validation inputLength={props.name.length} />
     </div>
   );
 }
